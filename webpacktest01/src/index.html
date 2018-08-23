@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+   
+    <!--不推荐在这里引用其他的 js 和 css 等文件，所有引入文件在main.js文件中引入-->
+    <!-- <script src="./src/main.js"></script> -->
+    <!--由于main.js 中使用了 es6 语法，浏览器无法识别，
+      使用 webpack 将 main.js 生成一个浏览器能识别的 bundle.js 文件-->
+      <script src="../src/js/vue.js"></script>
+      <script src="/bundle2.js"></script>
+
+</head> 
+<body>
+  <div id="app">
+
+        <ul v-for="item in list">
+
+            <li v-on:click="showtext(item)">{{item}}</li>
+            
+         </ul>
+
+  </div>
+    
+</body>
+</html>
+
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            list:[
+                '第1个',
+                '第2个',
+                '第3个',
+                '第4个',
+                '第5个',
+                '第6个'
+            ]
+        },
+        methods:{
+            showtext:(item)=>{
+                    alert(item);
+            }
+        }
+    });
+</script>
