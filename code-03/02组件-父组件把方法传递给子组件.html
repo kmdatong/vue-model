@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <!--1、自定义属性，funct1 见父组件方法传递给子组件。 2、子组件中通过 this.$emit('funct1')调用-->
+          <com1 v-on:funct1="show"></com1>
+      </div>
+    </body>
+<template id='temp1'>
+<div>
+    <h2>子组件</h2>
+    <input type="button" value="子组件按钮，点击调用父组件方法" v-on:click="myclick"/>
+</div>
+</template>
+    <script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            
+        },
+        methods:{
+            show:()=>{
+                alert('父组件show方法');
+            }
+        },
+        components:{
+            com1 : {
+                template:'#temp1',
+                methods:{
+                    myclick:function(){
+                       
+                       this.$emit('funct1');
+                    }
+                }
+            }
+        }
+    })
+    </script>
+</html>

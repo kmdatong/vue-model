@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <!--in 后面可以使 对象，数组，数字-->
+          <ul v-for="(val,key,index) in user">
+              <li>值：{{val}} --- key:{{key}} --- index:{{index}}</li>
+          </ul>
+      </div>
+    </body>
+
+    <script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            user:{
+                id:1,
+                age:23,
+                name:'大通'
+            }
+        }
+    })
+    </script>
+</html>

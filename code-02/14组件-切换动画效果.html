@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    <style>
+    .v-enter, .v-leave{
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    .v-enter-active, .v-leave-active{
+        transition: all 0.5s ease;
+    }
+    </style>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <a href="" v-on:click.prevent="compname='login'">登录</a>
+          <a href="" v-on:click.prevent="compname='register'">注册</a>
+          <br/>
+          <!-- component 是模板的占位符，：is 指定模板名称 -->
+          <transition mode="out-in">
+                <component :is="compname"></component>
+          </transition>
+         
+      </div>
+    </body>
+
+    <template id='tlogin'>
+        <div>
+            <h2>登录页面</h2>
+        </div>
+    </template>
+    <template id='tregister'>
+            <div>
+                <h2>注册页面</h2>
+            </div>
+        </template>
+    <script>
+
+   Vue.component('login',{
+       template:'#tlogin'
+   });
+
+    Vue.component('register',{
+       template:'#tregister'
+   });
+   
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            compname:'login'
+        }
+    })
+    </script>
+</html>

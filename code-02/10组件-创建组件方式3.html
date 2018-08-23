@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <my-component></my-component>
+      </div>
+    </body>
+     <template id="temp1">
+         <div>
+                <h2>template 标签创建组件</h2>
+                <p>这个方法很实用</p>
+         </div>
+      
+     </template>
+    <script>
+
+  
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            
+        },
+        components:{
+            'my-component':{template:'#temp1'}
+        }
+    })
+    </script>
+</html>

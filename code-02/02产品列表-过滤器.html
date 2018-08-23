@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+    <link href="./lib/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="./lib/vue.js"></script>
+    <style>
+      td,td {
+
+        padding: 10px 30px;
+      }
+    </style>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <div class="panel-body form-inline">
+                <label>
+                    Id: 
+                    <input type="text" class="form-control" v-model="id">
+                </label>
+                <label>
+                    名称: 
+                    <input type="text"  class="form-control" v-on:keyup.enter="addproduct" v-model="name">
+                </label>
+                <input type="button" class="btn btn-success"  value="添加" v-on:click="addproduct"/>
+
+                <label>
+                        输入关键字: 
+                        <input type="text" name="keyword" v-model ="keywords" v-focus class="form-control" >
+                    </label>
+          </div>
+        <table class="table">
+           
+            <thead>
+              <tr>
+                <th><input  type="checkbox"/></th>
+                <th>Id</th>
+                <th>名称</th>
+                <th>时间</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody v-for="item in search(keywords)" :v-key="item.id">
+              <tr>
+                <td><input  type="checkbox" :id="item.id"/></td>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.time | timeFormat}}</td>
+                <td>{{item.remark}}</td>
+                <td><a href="" style="cursor: pointer;" v-on:click.prevent='del(item.id)'>删除</a></td>
+              </tr>
+              
+            </tbody>
+          </table>
+      </div>
+    </body>
+
+    <script>
+
+ // 过滤器语法
+
+        //Vue.filter('过滤器语法'，操作方法)
+        // 注意： 1,过滤器不会改变data本身数据，只是改变实现值，
+        //       2,只对 {{}} 和 v-text 形式有用
+        //       3, 第一参数为要过滤的对象，第二个参数开始为 传进来的参数
+        // Vue.filter('timeFormat',function(datestr){  // 全局过滤器。所有的 vue实例都可以共享
+
+        //     var dt = new Date(datestr);
+
+        //     var y= dt.getFullYear();
+        //     var m = dt.getMonth() + 1;
+        //     var  d = dt.getDate();
+         
+        //     return y+'-'+m+'-'+d;
+
+        // })
+
+// 定义全局指令 v-focus
+// 定义是后指令名称不用加前缀 v- ,
+// 参数一：指令名称
+// 参数二：写指令相关的动作函数
+ Vue.directive('focus',{
+     // el 为被绑定的对象，el 为原生的js对象
+     bind:function(el){  // bind 单原数绑定到，dom 上的时候回立刻执行函数
+      el.focus();       // 这里打不到效果，执行函数的时候，元素还没有插入dom中，（元素还在内存中）
+     },
+     inserted:function(el){ // inserted 元素插入到 dom 中时候执行，只执行一次 （元素已经插入的页面dom中）
+        el.focus();
+     }
+ });
+
+// 总结： 和 js 相关的指令 最好在 inserted 中执行， 和 样式相关的可以在 bind 中执行。
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            id:'',
+            name:'',
+            keywords:'',//关键字查询
+            list:[
+                {id:1,name:'电视机',time:new Date(),remark:'qwefqwefqwefqwef'},
+                {id:2,name:'电冰箱',time:new Date(),remark:'qwefqwefqwefqwef'},
+                {id:3,name:'电饭煲',time:new Date(),remark:'qwefqwefqwefqwef'},
+                {id:4,name:'电风扇',time:new Date(),remark:'qwefqwefqwefqwef'},
+                {id:5,name:'点灯',time:new Date(),remark:'qwefqwefqwefqwef'},
+                {id:6,name:'电烤箱',time:new Date(),remark:'qwefqwefqwefqwef'}
+
+                ]
+        },
+        methods:{
+            addproduct:function(){
+                var product = {};
+                product.id = this.id;
+                product.name = this.name;
+                product.time = new Date();
+                product.remark = '';
+               
+               if(product.id !='' && product.name !='')
+                this.list.push(product);
+
+                this.id = this.name = '';
+            },
+            del:function(id)
+            {
+               // some() 循环数组每个元素，当返回 true 时候停止循环
+            // 方法1，   this.list.some((item,i) => {
+
+            //        if(item.id == id)
+            //        {
+            //           this.list.splice(i,1);  // 冲索引 i 开始往后删除原数，删除 1 个
+            //            return true;
+            //        }
+            //    });
+
+             // findIndex() 获取符合条件的索引，当返回 true 时候，返回当前 索引 并且停止循环
+             // 方法2
+                var index = this.list.findIndex(item => {
+                    if(item.id == id)
+                     return true;
+                });
+
+                this.list.splice(index,1);
+            },
+            search: function(){
+
+                    // 方法 1
+                //    var newlist = [];
+                //    this.list.forEach(item =>{
+                //     if(item.name.indexOf(this.keywords) >= 0)
+                //           newlist.push(item);
+                //    }) ;
+
+                //    return newlist;
+
+                // 数组操作常用方法 some, findIndex, filter,forEach 都会对数组的每一项进行遍历
+
+                // 方法 2
+              
+               return this.list.filter(item => item.name.includes(this.keywords));     
+
+
+            }
+        },
+        filters:{
+            timeFormat:function(datestr){  // 全局过滤器。所有的 vue实例都可以共享
+
+                var dt = new Date(datestr);
+                // padStart(numb,'vlue') 在前面填充字符 // numn 为填充后的字符长度，当字符串没有numb 时候，使用value 在前面填充
+                var y= dt.getFullYear().toString().padStart(2,'0');
+                var m = (dt.getMonth() + 1).toString().padStart(2,'0');
+                var  d = dt.getDate().toString().padStart(2,'0');
+
+                return y+'-'+m+'-'+d;
+
+                }
+        }
+    })
+
+       
+    </script>
+</html>

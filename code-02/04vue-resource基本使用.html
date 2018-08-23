@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    <!--vue-resource 依赖于 vue.js 所以必须放在 vue.js 下面 -->
+    <script src="./lib/vue-resource.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <input type="button" value="josnp获取数据" v-on:click="getdatainfo"/>
+
+          <ul v-for="item in list">
+                <li>{{item.title}}</li>
+          </ul>
+      </div>
+    </body>
+
+    <script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            list : []
+        },
+        methods:{
+            getdatainfo:function(){
+
+              // 参考地址  https://github.com/pagekit/vue-resource/blob/develop/docs/http.md
+                 this.$http.jsonp('https://api.douban.com//v2/movie/top250').then((response) => {
+                           
+                            this.list =  response.data.subjects;
+                        });
+            }
+        }
+    })
+    </script>
+</html>
+

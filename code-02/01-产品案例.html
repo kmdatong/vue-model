@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+    <link href="./lib/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="./lib/vue.js"></script>
+    <style>
+      td,td {
+
+        padding: 10px 30px;
+      }
+    </style>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <div class="panel-body form-inline">
+                <label>
+                    Id: 
+                    <input type="text" class="form-control" v-model="id">
+                </label>
+                <label>
+                    名称: 
+                    <input type="text"  class="form-control" v-model="name">
+                </label>
+                <input type="button" class="btn btn-success"  value="添加" v-on:click="addproduct"/>
+
+                <label>
+                        输入关键字: 
+                        <input type="text" name="keyword" v-model="keywords"  class="form-control" >
+                    </label>
+          </div>
+        <table class="table">
+           
+            <thead>
+              <tr>
+                <th><input  type="checkbox"/></th>
+                <th>Id</th>
+                <th>名称</th>
+                <th>时间</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody v-for="item in search(keywords)" :v-key="item.id">
+              <tr>
+                <td><input  type="checkbox" :id="item.id"/></td>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.time}}</td>
+                <td>{{item.remark}}</td>
+                <td><a href="" style="cursor: pointer;" v-on:click.prevent='del(item.id)'>删除</a></td>
+              </tr>
+              
+            </tbody>
+          </table>
+      </div>
+    </body>
+
+    <script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            id:'',
+            name:'',
+            keywords:'',//关键字查询
+            list:[
+                {id:1,name:'电视机',time:new Date(),remark:'qwefqwefqwefqwef'},
+                {id:2,name:'电冰箱',time:new Date(),remark:'qwefqwefqwefqwef'},
+                {id:3,name:'电饭煲',time:new Date(),remark:'qwefqwefqwefqwef'},
+                {id:4,name:'电风扇',time:new Date(),remark:'qwefqwefqwefqwef'},
+                {id:5,name:'点灯',time:new Date(),remark:'qwefqwefqwefqwef'},
+                {id:6,name:'电烤箱',time:new Date(),remark:'qwefqwefqwefqwef'}
+
+                ]
+        },
+        methods:{
+            addproduct:function(){
+                var product = {};
+                product.id = this.id;
+                product.name = this.name;
+                product.time = new Date();
+                product.remark = '';
+               
+               if(product.id !='' && product.name !='')
+                this.list.push(product);
+
+                this.id = this.name = '';
+            },
+            del:function(id)
+            {
+               // some() 循环数组每个元素，当返回 true 时候停止循环
+            // 方法1，   this.list.some((item,i) => {
+
+            //        if(item.id == id)
+            //        {
+            //           this.list.splice(i,1);  // 冲索引 i 开始往后删除原数，删除 1 个
+            //            return true;
+            //        }
+            //    });
+
+             // findIndex() 获取符合条件的索引，当返回 true 时候，返回当前 索引 并且停止循环
+             // 方法2
+                var index = this.list.findIndex(item => {
+                    if(item.id == id)
+                     return true;
+                });
+
+                this.list.splice(index,1);
+            },
+            search: function(){
+
+                    // 方法 1
+                //    var newlist = [];
+                //    this.list.forEach(item =>{
+                //     if(item.name.indexOf(this.keywords) >= 0)
+                //           newlist.push(item);
+                //    }) ;
+
+                //    return newlist;
+
+                // 数组操作常用方法 some, findIndex, filter,forEach 都会对数组的每一项进行遍历
+
+                // 方法 2
+              
+               return this.list.filter(item => item.name.includes(this.keywords));     
+
+
+            }
+        }
+    })
+    </script>
+</html>

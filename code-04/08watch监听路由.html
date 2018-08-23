@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/vue-router.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+
+
+            <router-link to='/account'>账户</router-link>
+
+          <router-view></router-view>
+      </div>
+  <template id='account'>
+   <div>
+    <h2>账户----组件</h2>
+
+    <router-link to='/account/login'>登录</router-link>
+    <router-link to='/account/register'>注册</router-link>
+    <router-view></router-view>
+   </div>
+  </template>
+
+  <template id='login'>
+        <div>
+         <h2>登录----组件</h2>
+        </div>
+   </template>
+
+    <template id='register'>
+        <div>
+            <h2>注册----组件</h2>
+        </div>
+    </template>
+
+    </body>
+
+    <script>
+
+     // 定义组件对象
+     var account = {
+         template:'#account'
+     }
+
+     var login = {
+         template:'#login'
+     }
+
+     var register = {
+         template:'#register'
+     }
+
+    var routeobj = new VueRouter({
+        routes:[
+            // 可以只用子路由
+            {
+                path:'/account',
+                component:account,
+                children:[
+                     {path:'login',component:login},
+                     {path:'register',component:register}
+                ]
+                }
+
+            // {path:'/account/login',component:login},
+            // {path:'/account/register',component:register}
+
+            ]
+    });
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            
+        },
+        router:routeobj,
+        watch:{  // 监听data 和 路由等变化
+            '$route.path':function (newvalue,oldvalue) {
+                console.log(newvalue + '----'+ oldvalue );
+            }
+        }
+    })
+    </script>
+</html>

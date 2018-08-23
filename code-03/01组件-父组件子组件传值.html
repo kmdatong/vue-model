@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <!--只用自定义组件 parentmsg 给组件传值
+            还要在子组件定义 props属性就可以使用了-->
+          <com1 v-bind:parentmsg="msg"></com1>
+      </div>
+    </body>
+
+    <template id='temp1'>
+        <div>
+            <h2>这是子组件---{{parentmsg}}</h2>
+
+        </div>
+    </template>
+    <script>
+
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            msg:'父组件传来的消息'
+        },
+        components:{
+            com1:{
+                props:['parentmsg'], // 在子组件中定义 prentmsg 来接受父组件传来的值
+                template:'#temp1'
+                }  // 注意：这里不能直接，data中的数据
+           
+        }
+    })
+    </script>
+</html>

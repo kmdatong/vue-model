@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <my-component></my-component>
+         
+      </div>
+    </body>
+    <template id="temp1">
+            <div>
+                <input type="button" value="点击+1" v-on:click="addone"/>
+              <h2>{{conunt}}</h2>
+             
+        </template>
+    <script>
+
+//1 组件也可以有自己的 data 可是，组件的data 必须是方法（不能是对象）,而且要放回一个对象
+ var data = {conunt:0};
+Vue.component('my-component',{
+        template:'#temp1',
+        data:function(){   
+            var dataobj = {};
+            dataobj.conunt =0;
+
+            return dataobj;
+        },
+        methods:{
+            addone:function(){
+                this.conunt +=1;
+            }
+        }
+    });
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            
+        }
+    })
+    </script>
+</html>

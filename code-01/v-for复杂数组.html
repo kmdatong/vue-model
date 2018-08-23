@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <ul v-for="(item , index) in list">
+              <li>id是：{{item.id}} --- 姓名是：{{item.name}} --- 索引是：{{index}}</li>
+          </ul>
+      </div>
+    </body>
+
+    <script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            list:[ 
+                {id:1,name:'大通'},
+                {id:2,name:'老王'},
+                {id:3,name:'老张'},
+                {id:4,name:'胡人'}
+            ]
+        }
+    })
+    </script>
+</html>

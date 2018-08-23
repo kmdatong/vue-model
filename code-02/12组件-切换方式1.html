@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <a href="" v-on:click.prevent="flag=true">登录</a>
+          <a href="" v-on:click.prevent="flag=false">注册</a>
+          <br/>
+          <login v-if='flag'></login>
+          <register v-else='flag'></register>
+      </div>
+    </body>
+
+    <template id='tlogin'>
+        <div>
+            <h2>登录页面</h2>
+        </div>
+    </template>
+    <template id='tregister'>
+            <div>
+                <h2>注册页面</h2>
+            </div>
+        </template>
+    <script>
+
+   Vue.component('login',{
+       template:'#tlogin'
+   });
+
+    Vue.component('register',{
+       template:'#tregister'
+   });
+   
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            flag:false
+        }
+    })
+    </script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+            <component-test></component-test>
+            <component-test></component-test>
+            <component-test></component-test>
+            <component-test></component-test>
+      </div>
+     
+    </body>
+
+    <script>
+
+        var componenta = Vue.extend({
+            // 通过 template 指定要展示的 html 内容
+            template:'<h2>exten 初始化的模板</h2>'
+        });
+
+   Vue.component('component-test',componenta);
+
+    var app = new Vue({
+        el:'#app'
+    })
+    </script>
+</html>

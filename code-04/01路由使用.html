@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/vue-router.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+
+        <!-- <a href="#/login">登录</a>
+        <a href="#/register">注册</a> -->
+        <!--路由中的查询字符串-->
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <router-view></router-view>
+      </div>
+    </body>
+    <template id='login'>
+            <div>
+                <h2>登录页面</h2>
+            </div>
+        </template>
+        <template id='register'>
+                <div>
+                    <h2>注册页面</h2>
+                </div>
+            </template>
+    <script>
+
+        var login = {
+            template:'#login'
+        };
+
+         var register = {
+            template:'#register'
+        };
+
+        var routeObject = new VueRouter({
+            routes:[
+                {path:'/',redirect:'/login'},
+                {path:'/login',component:login},
+                {path:'/register',component:register}
+            ]
+        });
+
+        var app = new Vue({
+            el:'#app',
+            data:{
+                
+            },
+            router:routeObject
+        })
+    </script>
+</html>

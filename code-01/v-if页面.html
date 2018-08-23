@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <!--v-if 特点： 每次重新删除或创建元素-->
+           <!--v-show 特点： 每次不进行dom操作，只是切换元素的 display：none-->
+          <ul v-for="item in list">
+              <!--v-show 有较高的初始渲染消耗，如果元素可能永远不用显示，则使用 v-if -->
+                <li v-show="item.id > 2">{{item.name}}</li>
+
+                <!-- v-if 有较高的切换性能消耗，如果需要频繁的切换，最后不用 v-show -->
+                <li v-if="item.id > 2">{{item.name}}</li>
+          </ul>
+      </div>
+    </body>
+
+    <script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            list:[
+                {id:1,name:'胡人'},
+                {id:2,name:'胡人2'},
+                {id:3,name:'胡人3'},
+                {id:4,name:'胡人4'}
+
+            ]
+        }
+    })
+    </script>
+</html>

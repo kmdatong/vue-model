@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+        
+      <div id="app">
+            <div>
+               <label>Id: <input v-model="id"></label>
+               <label>name: <input name="name" v-model="name"></label>
+               <input type="button" value="添加" v-on:click="add">
+            </div>
+                
+          <ul v-for="item  in list">
+              <li> <input type="checkbox"/> id是：{{item.id}} --- 姓名是：{{item.name}} --- </li>
+          </ul>
+      </div>
+    </body>
+
+    <script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            id:'',
+            name:'',
+            list:[ 
+                {id:1,name:'大通'},
+                {id:2,name:'老王'},
+                {id:3,name:'老张'},
+                {id:4,name:'胡人'}
+            ]
+        },
+        methods:{
+            add:function(){
+                var user = {};
+                user.id = this.id;
+                user.name = this.name;
+
+                this.list.push(user);
+            }
+        }
+    })
+    </script>
+</html>

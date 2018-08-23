@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="./lib/vue.js"></script>
+    </head>
+
+    <body style="margin:0px; display:inline; overflow: hidden;">
+      <div id="app">
+          <p id="p-msg">{{msg}}</p>
+          <input type="button" value="修改" v-on:click="modifyData"/>
+      </div>
+    </body>
+
+    <script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            msg:'调用'
+        },
+        methods:{
+            modifyData:function(){
+                this.msg = "已修改";
+            }
+        },
+        // 第一个： 对象的 data 和 methods 等，都还没有创建
+        beforeCreate:function(){
+            console.log('beforeCreate:'+ this.msg);  // 此时data 还没有被初始化，输出 undefined
+        },
+        // 第二个 ： data ， methods 等已经创建好
+        created:function(){
+            console.log('create：'+ this.msg);
+        },
+        // 第三个： 模板已经在内存中编译完成，但还没有 渲染到页面上。
+        beforeMount:function(){
+            console.log('beforeMount:'+ document.getElementById('p-msg').innerText);
+        },
+         // 第四个：这个时候模板已经加载到页面中
+         // mounted 执行完成，表示整个 vue 实例初始化完成
+        mounted:function(){
+
+            console.log('mounted:'+ document.getElementById('p-msg').innerText);
+        },
+
+        
+        /// 接下来是运行中的 2 个事件
+        beforeUpdate:function(){ // beforeUpdate 执行后 data 中的数据已经更新，而 页面上的数据仍然是老的数据
+
+            console.log('beforeUpdate 此时data 中的数据是：'+this.msg);
+            console.log('beforeUpdate 此时 页面 上的数据是：'+ document.getElementById('p-msg').innerText);
+        },
+        updated:function(){ // updated 执行时 data 和 页面数据都已经更新了。
+
+            console.log('updated 此时data 中的数据是：'+this.msg);
+            console.log('updated 此时 页面 上的数据是：'+ document.getElementById('p-msg').innerText);
+        }
+
+
+    })
+    </script>
+</html>
