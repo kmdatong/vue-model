@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+     
+
+
+    </div>
+</body>
+
+<template id='temp1'>
+    <div>
+        <h2>登录组件</h2>
+    </div>
+</template>
+
+</html>
+
+<script>
+
+    var com1 = {
+        template:'#temp1'
+    }
+
+    new Vue({
+        el:'#app',
+        data:{
+
+        },
+        components:{
+            com1
+        },
+        render:(createElement)=>{
+             // 指定组件模板，渲染为html
+
+             return createElement(com1);   
+             // 注意： 放回的结果会替换，页面中 el 指定的那个容器。
+        }
+    })
+</script>

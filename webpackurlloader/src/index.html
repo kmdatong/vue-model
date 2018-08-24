@@ -4,25 +4,22 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
-   
+  
     <!--不推荐在这里引用其他的 js 和 css 等文件，所有引入文件在main.js文件中引入-->
     <!-- <script src="./src/main.js"></script> -->
     <!--由于main.js 中使用了 es6 语法，浏览器无法识别，
       使用 webpack 将 main.js 生成一个浏览器能识别的 bundle.js 文件-->
-   
+      <!-- <script src="../src/js/vue.js"></script> -->
       <script src="/bundle.js"></script>
 
 </head> 
-<body>y
-  <div id="app">
-
-        <ul v-for="item in list">
-
-            <li v-on:click="showtext(item)">{{item}}</li>
-            
-         </ul>
-
-  </div>
+<body>
+   <div class="box">
+ 
+   </div>
     
+   <div class="alert alert-primary" role="alert">
+    This is a primary alert—check it out!------bootstrap的样式
+  </div>
 </body>
 </html>

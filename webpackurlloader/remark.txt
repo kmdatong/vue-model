@@ -1,0 +1,12 @@
+
+图片显示需要依赖 url-loader 、 file-loader (file-loader 为 url-loader的内部依赖) 
+
+// 此处为es6 语法，需要借助 插件babel 来将其转换为 低级语法。
+// 可以通过安装如下两套包来解决问题---(两套都必须装)
+//1.1  npm i babel-core  babel-loader babel-plugin-transform-runtime -D
+//1.2  npm i babel-preset-env babel-preset-stage-0 -D
+//2 打开配置文件 webpack.config.js 在module 中添加规则
+// {test:/\.js/,use:'babel-loader',exclude:/node_modules/} 
+// 注意： 排除 node_modules文件中的js 
+// 3 在项目更目录中创一个一个babel 的配置文件 '.babelrc' 的文件，里面的配置用json语法
+// 4 在 .babelrc 中写如下配置 

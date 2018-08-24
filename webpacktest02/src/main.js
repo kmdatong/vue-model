@@ -1,5 +1,5 @@
 // 这里是项目的 js 入口文件
-
+import Vue from '../node_modules/vue/dist/vue.js'
 //1 导入jquery 
 import $ from 'jquery'
 // 导入样式表
@@ -28,4 +28,24 @@ $('li:even').css('background-color','red');
 // 运行命令  npm run start 或者 npm run dev 
 
 
-// 安装 html-webpack-plugin 插件，作用是在内存中生成 html 
+// 安装 html-webpack-plugin 插件，作用是在内存中生成 html ,否则先 new Vue() 代码 无法正常运行
+// 应给 webpack-dev-server 生成的包（bundlejs）在内存中，如果html 不在内存中，就掉不到 bundlel.js 问
+
+var vm = new Vue({
+    el:'#app',
+    data:{
+        list:[
+            '第1个',
+            '第2个',
+            '第3个',
+            '第4个',
+            '第5个',
+            '第6个'
+        ]
+    },
+    methods:{
+        showtext:(item)=>{
+                alert(item);
+        }
+    }
+});
