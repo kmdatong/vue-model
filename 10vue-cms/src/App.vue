@@ -6,8 +6,10 @@
      <mt-header fixed title="大通的cms系统"></mt-header>
 
  <!--router-view 区域-->
+<transition>
+	<router-view></router-view>
+</transition>
 
-<router-view></router-view>
 
 
 <!--tabbar 区域-->
@@ -47,4 +49,19 @@
     overflow: hidden;
     text-overflow: ellipsis;
     }
+
+	body{
+		background-color: #fff;
+	}
+
+	.v-enter,.v-leave-to{
+        opacity: 0;
+		transform:  translateX(100%)
+	}
+
+	.v-enter-active,
+	.v-leave-active{
+		transition: all 0.5s ease;
+	}
+
 </style>

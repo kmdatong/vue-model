@@ -18,15 +18,19 @@ import Member from './components/Member.vue'
 import ShopCar from './components/ShopCar.vue'
 import Search from './components/Search.vue'
 
+// 导入 vue-resource
+import VueResource from 'vue-resource'
+
 Vue.component(Header.name, Header );
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 
 Vue.use(vueRouter)
+Vue.use(VueResource)
 
 var router = new vueRouter({
     routes:[
-    
+        {path:'/',redirect:Home},
       {path:'/home',component:Home},
       {path:'/member',component:Member},
       {path:'/shopcar',component:ShopCar},

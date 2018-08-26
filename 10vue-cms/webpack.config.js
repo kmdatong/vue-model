@@ -20,16 +20,9 @@ module.exports={
     ],
     module:{
         rules:[
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    loaders: {
-                        scss: 'style-loader!css-loader!sass-loader',
-                        sass: 'style-loader!css-loader!sass-loader?indentedSyntax',
-                    },
-                },
-            },
+            { test: /\.vue$/,
+                use: 'vue-loader'},
+                {test:/\.js/,use:'babel-loader',exclude:/node_modules/} ,
             {test:/\.(jpg|png|gif|jpeg|bmp)$/,use:'url-loader?limit=8000'},
             // limit 限制图片是否转换为 base64 ,如果图片大小，小于 8000 则不转换为 base64 ， 反之则转换
             {test:/\.(ttf|eot|svg|woff|woff2)$/,use:'url-loader'},
