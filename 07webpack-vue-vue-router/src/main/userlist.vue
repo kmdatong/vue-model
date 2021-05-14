@@ -1,9 +1,9 @@
 
 <template>
     <div>
-     <h2>商品 组件 </h2>
+     <h2>用户 组件 </h2>
 
-       <ul v-for="item in list">
+       <ul v-for="item in list" :key="item">
          <li>{{item}}</li>
        </ul>
     </div>

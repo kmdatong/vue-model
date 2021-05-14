@@ -14,9 +14,9 @@
 
     <body style="margin:0px; display:inline; overflow: hidden;">
       <div id="app">
-          <div :style="{color:'red'}">{{msg}} </div>
+          <div :style="{color:'yellow'}">{{msg}} </div>
           <h1 :style="red">style样式实例</h1>
-          <div :style="[red,fontsize]">样式数组</div>
+          <div :style="[yellow,fontsize]">样式数组</div>
       </div>
     </body>
 
@@ -25,6 +25,7 @@
             el:'#app',
             data:{
                 msg:"hello world !",
+                yellow:{'color':'yellow'},
                 red:{'color':'red'},
                 fontsize:{'font-size':'24px;'}
             }

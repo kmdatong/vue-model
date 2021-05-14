@@ -17,6 +17,7 @@ import Home from './components/Home.vue'
 import Member from './components/Member.vue'
 import ShopCar from './components/ShopCar.vue'
 import Search from './components/Search.vue'
+import newslist from './components/newslist.vue'
 
 // 导入 vue-resource
 import VueResource from 'vue-resource'
@@ -30,11 +31,12 @@ Vue.use(VueResource)
 
 var router = new vueRouter({
     routes:[
-        {path:'/',redirect:Home},
+        {path:'/',component:Home},
       {path:'/home',component:Home},
       {path:'/member',component:Member},
       {path:'/shopcar',component:ShopCar},
-      {path:'/search',component:Search}
+      {path:'/search',component:Search},
+      {path:'/home/newslist',component:newslist},
     ],
     linkActiveClass:'mui-active'
 })

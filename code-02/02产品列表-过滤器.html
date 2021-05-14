@@ -49,7 +49,7 @@
                 <td><input  type="checkbox" :id="item.id"/></td>
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
-                <td>{{item.time | timeFormat}}</td>
+                <td>{{item.time | dateFormat}}</td>
                 <td>{{item.remark}}</td>
                 <td><a href="" style="cursor: pointer;" v-on:click.prevent='del(item.id)'>删除</a></td>
               </tr>
@@ -107,7 +107,7 @@
                 {id:3,name:'电饭煲',time:new Date(),remark:'qwefqwefqwefqwef'},
                 {id:4,name:'电风扇',time:new Date(),remark:'qwefqwefqwefqwef'},
                 {id:5,name:'点灯',time:new Date(),remark:'qwefqwefqwefqwef'},
-                {id:6,name:'电烤箱',time:new Date(),remark:'qwefqwefqwefqwef'}
+                {id:6,name:'电烤箱',time:'2016-05-10 24:12:20',remark:'qwefqwefqwefqwef'}
 
                 ]
         },
@@ -166,15 +166,20 @@
             }
         },
         filters:{
-            timeFormat:function(datestr){  // 全局过滤器。所有的 vue实例都可以共享
+            dateFormat:function(datestr){  // 全局过滤器。所有的 vue实例都可以共享
+                if(isNaN(Date.parse(datestr)))
+                return '';
 
                 var dt = new Date(datestr);
                 // padStart(numb,'vlue') 在前面填充字符 // numn 为填充后的字符长度，当字符串没有numb 时候，使用value 在前面填充
                 var y= dt.getFullYear().toString().padStart(2,'0');
-                var m = (dt.getMonth() + 1).toString().padStart(2,'0');
+                var MM = (dt.getMonth() + 1).toString().padStart(2,'0');
                 var  d = dt.getDate().toString().padStart(2,'0');
-
-                return y+'-'+m+'-'+d;
+                let HH = dt.getHours().toString().padStart(2,'0');
+                let m = dt.getMinutes().toString().padStart(2,'0');
+                let s = dt.getSeconds().toString().padStart(2,'0');
+                
+                return y+'-'+ MM +'-'+d +' '+ HH +':'+ m +':'+s;
 
                 }
         }

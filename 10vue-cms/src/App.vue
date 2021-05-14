@@ -25,12 +25,12 @@
 			<router-link to="/shopcar" class="mui-tab-item">
       <span class="mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">0</span></span>
 		
-				<span class="gouwuche  mui-tab-label">购物车</span>
-			</router-link>
+	  <span class="gouwuche  mui-tab-label">购物车</span>
+	</router-link>
 		
       <router-link to="/search" class="mui-tab-item">
       	<span class="mui-icon mui-icon-search"></span>
-				<span class="mui-tab-label">搜索</span>
+		<span class="mui-tab-label">搜索</span>
       </router-link>
 			
 		</nav>

@@ -17,7 +17,7 @@ $('li:even').css('background-color','red');
 })
 
 // 使用 webpack-dev-server 这个工具，来实现自动打包功能
-//1、运行 命令 npm i webpack-dev-server -D 将工具安装到本地开发依赖
+//1、运行 命令 npm i webpack -D 将工具安装到本地开发依赖
 //2、 安装完毕后，webpack-dev-server 的 命令和 webpack 完全一样
 //3、 由于是本地安装的（不是全局安装 -g） ，无法直接当做命令运行
 //4、注意：webpack-dev-server 要求在本地安装（即使已经全局安装了也不行） webpack 

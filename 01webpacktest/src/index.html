@@ -16,9 +16,9 @@
 <body>
   <div id="app">
 
-        <ul v-for="item in list">
+        <ul v-for="(item,index) in list">
 
-            <li v-on:click="showtext(item)">{{item}}</li>
+            <li v-on:click="showtext(index)">{{item}}</li>
             
          </ul>
 
